@@ -1,10 +1,9 @@
 import React from "react";
-import oreobot from "./oreobot.jsx";
+import Oreobot from "./oreobot.jsx";
 
 export default function App() {
   return <oreobot />;
 }
-
 
 
 
