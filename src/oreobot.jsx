@@ -10,7 +10,14 @@ export default function OreoVoiceBot() {
   const [hasGreeted, setHasGreeted] = useState(false);
 
   const recognitionRef = useRef(null);
-  const synthRef = useRef(window.speechSynthesis);
+  const synthRef = useRef(null);
+
+useEffect(() => {
+  if (typeof window !== "undefined") {
+    synthRef.current = window.speechSynthesis;
+  }
+}, []);
+
   const chatContainerRef = useRef(null);
 
   const knowledgeBase = {
@@ -58,7 +65,8 @@ export default function OreoVoiceBot() {
   }, [hasGreeted]);
 
   useEffect(() => {
-    if ("webkitSpeechRecognition" in window) {
+ if (typeof window !== "undefined" && "webkitSpeechRecognition" in window) {
+
       const recognition = new webkitSpeechRecognition();
       recognition.continuous = false;
       recognition.interimResults = false;
@@ -356,3 +364,4 @@ export default function OreoVoiceBot() {
     </div>
   );
 }
+
